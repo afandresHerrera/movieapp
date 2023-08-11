@@ -1,16 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://api.themoviedb.org/3/',
+  apiKey: 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZGIwZGE0MmZkOTk4NWY1ODVhNWFiOTZkY2EzMGE5MiIsInN1YiI6IjY0ZDU3YjY3ZjE0ZGFkMDBlM2I3NjliZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xPi1b7HTP2XbeKBa4quj3_3vjABIApd2VlG4bbG04G0'
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
