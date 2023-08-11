@@ -1,1 +1,29 @@
-<p>home works!</p>
+<mat-tab-group animationDuration="0ms" (selectedTabChange)="changeTab($event)" class="home-tabs">
+    <mat-tab [label]="getTabName('movie')" ariaLabel="movie">
+
+        <mat-card *ngFor="let movie of movies">
+            <img mat-card-image [src]="imgUrl + movie.poster_path" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <h2 class="title">
+                    {{ movie.original_title }}
+                </h2>
+                <p class="genre-names">
+                    <ng-container *ngFor="let genre of movie.genre_ids; let i = index">
+                        {{ genre.name }} {{ (i) !== (movie.genre_ids.length - 1) ? ' / ' : '' }}
+                    </ng-container>
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="rate-container">
+                    <mat-icon class="icon-rate rated" aria-label="1">star</mat-icon>
+                    <mat-icon class="icon-rate" aria-label="2">star</mat-icon>
+                    <mat-icon class="icon-rate" aria-label="3">star</mat-icon>
+                    <mat-icon class="icon-rate" aria-label="4">star</mat-icon>
+                    <mat-icon class="icon-rate" aria-label="5">star</mat-icon>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+
+    </mat-tab>
+    <mat-tab [label]="getTabName('tv')" ariaLabel="tv">Content 2</mat-tab>
+</mat-tab-group>

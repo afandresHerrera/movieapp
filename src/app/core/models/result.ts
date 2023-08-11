@@ -1,4 +1,6 @@
-export interface Response {
+import { Genre } from "./Genre"
+
+export interface tmdbResponse {
   page: number
   results: Result[]
   total_pages: number
