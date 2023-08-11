@@ -13,17 +13,28 @@
                     </ng-container>
                 </p>
             </mat-card-content>
+            <!-- <span>
+                {{ movie.vote_average }}
+            </span>
+            <span>
+                {{ getRatedNumber(movie.vote_average) }}
+            </span> -->
             <mat-card-actions>
                 <div class="rate-container">
-                    <mat-icon class="icon-rate rated" aria-label="1">star</mat-icon>
-                    <mat-icon class="icon-rate" aria-label="2">star</mat-icon>
-                    <mat-icon class="icon-rate" aria-label="3">star</mat-icon>
-                    <mat-icon class="icon-rate" aria-label="4">star</mat-icon>
-                    <mat-icon class="icon-rate" aria-label="5">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 1 }"
+                        aria-label="1">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 2 }"
+                        aria-label="2">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 3 }"
+                        aria-label="3">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 4 }"
+                        aria-label="4">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 5 }"
+                        aria-label="5">star</mat-icon>
                 </div>
             </mat-card-actions>
         </mat-card>
 
     </mat-tab>
-    <mat-tab [label]="getTabName('tv')" ariaLabel="tv">Content 2</mat-tab>
+    <mat-tab [label]="getTabName('tv')" ariaLabel="tv"></mat-tab>
 </mat-tab-group>

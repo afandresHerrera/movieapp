@@ -6,6 +6,7 @@ import { TabName } from 'src/app/core/models/TabName';
 import { Result } from 'src/app/core/models/result';
 import { MovieService } from 'src/app/core/services/movie.service';
 import { environment } from 'src/environments/environment';
+import { operations } from '../../../utils/operations';
 
 interface ProductView extends Omit<Result, 'genre_ids'> {
   genre_ids: Genre[]
@@ -116,5 +117,9 @@ export class HomeComponent implements OnInit {
     }
 
     return genreObj ?? null;
+  }
+
+  getRatedNumber(rating: number): number {
+    return operations.getRatedStar(rating);
   }
 }
