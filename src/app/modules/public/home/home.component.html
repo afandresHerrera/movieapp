@@ -13,12 +13,6 @@
                     </ng-container>
                 </p>
             </mat-card-content>
-            <!-- <span>
-                {{ movie.vote_average }}
-            </span>
-            <span>
-                {{ getRatedNumber(movie.vote_average) }}
-            </span> -->
             <mat-card-actions>
                 <div class="rate-container">
                     <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(movie.vote_average) >= 1 }"
@@ -36,5 +30,35 @@
         </mat-card>
 
     </mat-tab>
-    <mat-tab [label]="getTabName('tv')" ariaLabel="tv"></mat-tab>
+    <mat-tab [label]="getTabName('tv')" ariaLabel="tv">
+
+        <mat-card *ngFor="let show of tvShows">
+            <img mat-card-image [src]="imgUrl + show.poster_path" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <h2 class="title">
+                    {{ show.original_title }}
+                </h2>
+                <p class="genre-names">
+                    <ng-container *ngFor="let genre of show.genre_ids; let i = index">
+                        {{ genre.name }} {{ (i) !== (show.genre_ids.length - 1) ? ' / ' : '' }}
+                    </ng-container>
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="rate-container">
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(show.vote_average) >= 1 }"
+                        aria-label="1">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(show.vote_average) >= 2 }"
+                        aria-label="2">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(show.vote_average) >= 3 }"
+                        aria-label="3">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(show.vote_average) >= 4 }"
+                        aria-label="4">star</mat-icon>
+                    <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(show.vote_average) >= 5 }"
+                        aria-label="5">star</mat-icon>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+
+    </mat-tab>
 </mat-tab-group>

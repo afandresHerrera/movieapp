@@ -32,28 +32,7 @@ export class HomeComponent implements OnInit {
       genre_name: 'tv',
       tab_name: 'series'
     }
-  ]
-
-  testMovie = {
-    "adult": false,
-    "backdrop_path": "/o7JVhqMmrex1TPbmuxl8YXVlcfl.jpg",
-    "genre_ids": [
-      { "id": 28, "name": "Acción" },
-      { "id": 35, "name": "Comedia" },
-      { "id": 14, "name": "Fantasía" }
-    ],
-    "id": 287947,
-    "original_language": "en",
-    "original_title": "Shazam!",
-    "overview": "Billy Batson, un chico astuto de 14 años, puede transformarse mágicamente en el superhéroe adulto Shazam. Sus poderes se pondrán a prueba contra el malvado Dr. Thaddeus Sivana.",
-    "popularity": 43.666,
-    "poster_path": "/4f5Rz8uYpcTvo1hHKcQRSaay0ek.jpg",
-    "release_date": "2019-03-29",
-    "title": "¡Shazam!",
-    "video": false,
-    "vote_average": 7.036,
-    "vote_count": 8750
-  };
+  ];
 
   constructor(
     private movieService: MovieService
@@ -72,9 +51,10 @@ export class HomeComponent implements OnInit {
       console.log(this.movieGenres);
       this.movieService.getTrending('movie').subscribe(res => {
         this.movies = res.results.map(item => {
-          let genres = item.genre_ids.map(id => {
+          const genres = item.genre_ids.map(id => {
             return this.getGenreName(id, 'movie');
           });
+
           return <ProductView>{
             ...item,
             genre_ids: genres
@@ -86,21 +66,33 @@ export class HomeComponent implements OnInit {
   }
 
   getTVShows() {
-
     this.movieService.getGenres('tv').subscribe(res => {
       this.tvGenres = res;
 
       this.movieService.getTrending('tv').subscribe(res => {
-        // this.tvShows = res.results;
+        this.tvShows = res.results.map(item => {
+          const genres = item.genre_ids.map(id => {
+            return this.getGenreName(id, 'tv');
+          });
+
+          return <ProductView>{
+            ...item,
+            genre_ids: genres
+          }
+        })
       });
+      console.log(this.tvShows);
     });
 
   }
 
   changeTab(tabEvent: MatTabChangeEvent) {
-    console.log(tabEvent);
     const tab = tabEvent.tab;
-    console.log(tab.textLabel.toLowerCase());
+    const tabName = tab.textLabel.toLowerCase();
+
+    if (tabName === 'series') {
+      this.getTVShows();
+    }
   }
 
   getTabName(genre: Product) {
