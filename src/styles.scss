@@ -71,9 +71,16 @@ body p {
 // ya que hacen parte del layout completo de la app
 .main-header {
   background-color: #032541;
-  padding: 0.625rem 0;
-  text-align: center;
   width: 100%;
+
+  .inner-header {
+    padding: 0.75rem 0;
+    margin: 0 auto;
+    max-width: 1280px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
 
   .logo {
     height: 1.5rem;
@@ -116,7 +123,7 @@ body p {
     rgba(39, 186, 210, 1) 75%,
     rgba(1, 179, 229, 1) 100%
   );
-  padding: 1rem 0;
+  // padding: 1rem 0;
   min-height: calc(100vh - 94px);
 }
 
