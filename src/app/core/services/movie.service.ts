@@ -5,8 +5,10 @@ import { Subject } from 'rxjs/internal/Subject';
 import { environment } from 'src/environments/environment';
 import { sessionPersistence } from '../../utils/session-persistence';
 import { Genre } from '../models/Genre';
-import { Product } from '../models/Product';
+import { ProductType } from '../models/ProductType';
 import { tmdbResponse } from '../models/result';
+import { TVShowDetail } from '../models/TvShowDetail';
+import { MovieDetail } from '../models/MovieDetail';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -24,7 +26,7 @@ export class MovieService {
     this._searchString.next(searchText);
   }
 
-  getTrending(type: Product = 'movie', page = 1, lang = 'es-MX'): Observable<tmdbResponse> {
+  getTrending(type: ProductType = 'movie', page = 1, lang = 'es-MX'): Observable<tmdbResponse> {
     const objParams = {
       language: lang,
       page: page
@@ -34,7 +36,16 @@ export class MovieService {
     return this.http.get<tmdbResponse>(`${environment.apiUrl}trending/${type}/day`, { params });
   }
 
-  getGenres(type: Product = 'movie', lang = 'es'): Observable<Genre[]> {
+  getProductDetail(productId: string, type: ProductType = 'movie', lang = 'es-MX'): Observable<MovieDetail | TVShowDetail> {
+    const objParams = {
+      language: lang
+    };
+    const params = new HttpParams({ fromObject: objParams });
+
+    return this.http.get<MovieDetail | TVShowDetail>(`${environment.apiUrl}${type}/${productId}`, { params });
+  }
+
+  getGenres(type: ProductType = 'movie', lang = 'es'): Observable<Genre[]> {
     let response: Genre[] = [];
 
     return new Observable<Genre[] | []>(obs => {
@@ -55,7 +66,7 @@ export class MovieService {
     });
   }
 
-  searchProduct(query: string, type: Product = 'movie', page: number = 1, lang = 'es'): Observable<tmdbResponse> {
+  searchProduct(query: string, type: ProductType = 'movie', page: number = 1, lang = 'es'): Observable<tmdbResponse> {
     const objParams = {
       query: query,
       page: page,

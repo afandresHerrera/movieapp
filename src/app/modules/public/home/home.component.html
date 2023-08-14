@@ -34,7 +34,7 @@
     </mat-tab>
     <mat-tab [label]="getTabName('tv')" ariaLabel="tv">
 
-        <mat-card *ngFor="let show of tvShows">
+        <mat-card *ngFor="let show of tvShows" (click)="goToDetail(show.id)">
             <img *ngIf="show.poster_path" mat-card-image [src]="imgUrl + show.poster_path" [alt]="show.original_name">
             <img *ngIf="!show.poster_path" mat-card-image src="assets/no-image.jpg" [alt]="show.original_name">
             <mat-card-content>

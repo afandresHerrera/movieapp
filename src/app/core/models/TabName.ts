@@ -1,6 +1,6 @@
-import { Product } from "./Product"
+import { ProductType } from "./ProductType"
 
 export interface TabName {
-    genre_name: Product
+    genre_name: ProductType
     tab_name: string
 }
