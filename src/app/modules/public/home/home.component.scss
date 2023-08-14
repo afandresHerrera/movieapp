@@ -4,6 +4,17 @@
   justify-content: center;
 }
 
+::ng-deep.mat-tab-body-wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+::ng-deep.mat-paginator-outer-container {
+  background-color: #010a11;
+  color: #fff;
+}
+
 .mat-card {
   width: 240px;
   padding: 2rem;
@@ -26,6 +37,7 @@
   }
 
   .genre-names {
+    min-height: 1rem;
     text-align: center;
   }
 
@@ -41,7 +53,6 @@
 
     .icon-rate {
       color: #fff;
-      cursor: pointer;
       transition: all ease-in-out 150ms;
 
       &.rated {
@@ -82,3 +93,4 @@
 		transform: scale(1.05);
 	}
 }
+

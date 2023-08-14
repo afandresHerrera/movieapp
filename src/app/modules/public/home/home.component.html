@@ -1,8 +1,10 @@
 <mat-tab-group animationDuration="0ms" (selectedTabChange)="changeTab($event)" class="home-tabs">
     <mat-tab [label]="getTabName('movie')" ariaLabel="movie">
 
-        <mat-card *ngFor="let movie of movies">
-            <img mat-card-image [src]="imgUrl + movie.poster_path" alt="Photo of a Shiba Inu">
+        <mat-card *ngFor="let movie of movies" (click)="goToDetail(movie.id)">
+            <img *ngIf="movie.poster_path" mat-card-image [src]="imgUrl + movie.poster_path"
+                [alt]="movie.original_title">
+            <img *ngIf="!movie.poster_path" mat-card-image src="assets/no-image.jpg" [alt]="movie.original_title">
             <mat-card-content>
                 <h2 class="title">
                     {{ movie.original_title }}
@@ -33,14 +35,18 @@
     <mat-tab [label]="getTabName('tv')" ariaLabel="tv">
 
         <mat-card *ngFor="let show of tvShows">
-            <img mat-card-image [src]="imgUrl + show.poster_path" alt="Photo of a Shiba Inu">
+            <img *ngIf="show.poster_path" mat-card-image [src]="imgUrl + show.poster_path" [alt]="show.original_name">
+            <img *ngIf="!show.poster_path" mat-card-image src="assets/no-image.jpg" [alt]="show.original_name">
             <mat-card-content>
                 <h2 class="title">
-                    {{ show.original_title }}
+                    {{ show.original_name }}
                 </h2>
                 <p class="genre-names">
                     <ng-container *ngFor="let genre of show.genre_ids; let i = index">
                         {{ genre.name }} {{ (i) !== (show.genre_ids.length - 1) ? ' / ' : '' }}
+                    </ng-container>
+                    <ng-container *ngIf="show.genre_ids.length === 0">
+                        &nbsp;
                     </ng-container>
                 </p>
             </mat-card-content>
@@ -59,6 +65,7 @@
                 </div>
             </mat-card-actions>
         </mat-card>
-
     </mat-tab>
 </mat-tab-group>
+<mat-paginator [length]="totalItems" [pageSize]="20" aria-label="Select page" (page)="changePage($event)">
+</mat-paginator>

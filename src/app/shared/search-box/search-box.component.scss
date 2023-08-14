@@ -1,0 +1,31 @@
+:host {
+  position: absolute;
+  top: 7px;
+  right: 0.5rem;
+}
+
+.search-box {
+  color: #fff;
+
+  .search-button {
+    box-shadow: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+
+    mat-icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  .search-input {
+    border: 0;
+    border-radius: 18px;
+    font-size: 1.25rem;
+    height: 36px;
+    outline: none;
+    padding: 8px 16px;
+  }
+}

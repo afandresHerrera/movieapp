@@ -1,34 +1,35 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { Subject } from 'rxjs/internal/Subject';
 import { environment } from 'src/environments/environment';
-import { Product } from '../models/Product';
-import { Genre } from '../models/Genre';
 import { sessionPersistence } from '../../utils/session-persistence';
+import { Genre } from '../models/Genre';
+import { Product } from '../models/Product';
 import { tmdbResponse } from '../models/result';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MovieService {
+  private _searchString = new Subject<string>();
 
   constructor(
     private http: HttpClient
-  ) {
+  ) { }
+
+  public get searchString() {
+    return this._searchString;
   }
 
-  // getMovies(lang = 'es-MX'): Observable<tmdbResponse> {
-  //   let params = new HttpParams().set('language', lang);
+  setSearch(searchText: string) {
+    this._searchString.next(searchText);
+  }
 
-  //   return this.http.get<tmdbResponse>(environment.apiUrl + 'trending/movie/day', { params });
-  // }
-
-  // getTVShows(lang = 'es-MX'): Observable<tmdbResponse> {
-  //   let params = new HttpParams().set('language', lang);
-
-  //   return this.http.get<tmdbResponse>(environment.apiUrl + 'trending/tv/day', { params });
-  // }
-
-  getTrending(type: Product = 'movie', lang = 'es-MX'): Observable<tmdbResponse> {
-    let params = new HttpParams().set('language', lang);
+  getTrending(type: Product = 'movie', page = 1, lang = 'es-MX'): Observable<tmdbResponse> {
+    const objParams = {
+      language: lang,
+      page: page
+    };
+    const params = new HttpParams({ fromObject: objParams });
 
     return this.http.get<tmdbResponse>(`${environment.apiUrl}trending/${type}/day`, { params });
   }
@@ -52,5 +53,17 @@ export class MovieService {
         obs.complete();
       }
     });
+  }
+
+  searchProduct(query: string, type: Product = 'movie', page: number = 1, lang = 'es'): Observable<tmdbResponse> {
+    const objParams = {
+      query: query,
+      page: page,
+      language: lang,
+      include_adult: 'false'
+    };
+    const params = new HttpParams({ fromObject: objParams });
+
+    return this.http.get<tmdbResponse>(`${environment.apiUrl}search/${type}`, { params });
   }
 }

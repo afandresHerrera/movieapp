@@ -8,8 +8,8 @@ export const routes: Routes = [
         component: LayoutComponent,
         canActivate: [SessionAuthGuard],
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', loadChildren: () => import('../modules/public/home.module').then(m => m.HomeModule) },
+            { path: '', redirectTo: '', pathMatch: 'full' },
+            { path: '', loadChildren: () => import('../modules/public/home.module').then(m => m.HomeModule) },
         ]
     },
 

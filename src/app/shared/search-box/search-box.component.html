@@ -1,0 +1,7 @@
+<div class="search-box">
+    <!-- <button color="basic" class="search-button" mat-mini-fab aria-label="search button" (click)="emitSearch(search)">
+        <mat-icon class="search-icon">search</mat-icon>
+      </button>     -->
+    <input class="search-input" type="search" placeholder="Search" [(ngModel)]="search"
+        (keyup.enter)="emitSearch($event)" (ngModelChange)="modelChanged($event)" aria-label="Search">
+</div>
