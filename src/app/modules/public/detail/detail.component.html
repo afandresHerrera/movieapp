@@ -1,0 +1,58 @@
+<div class="full-width" *ngIf="product">
+    <mat-icon class="back-icon" (click)="goBack()">
+        arrow_back_ios
+    </mat-icon>
+    <div class="img-backdrop">
+        <img *ngIf="product.poster_path" mat-card-image [src]="imgUrl + product.backdrop_path" />
+    </div>
+
+    <div class="detail-content">
+        <h1 class="title">
+            {{ productType === 'movie' ? product?.title : product?.name }}
+        </h1>
+        <p class="overview">
+            {{ product?.overview }}
+        </p>
+        <p class="genre-names">
+            <b>Generos: </b>
+            <ng-container *ngFor="let genre of productGenres; let i = index">
+                {{ genre }} {{ (i) !== (productGenres.length - 1) ? ' / ' : '' }}
+            </ng-container>
+        </p>
+
+        <p class="compaine-names">
+            <b>Compañias: </b>
+            <ng-container *ngFor="let companie of product.production_companies; let i = index">
+                {{ companie.name }} {{ (i) !== (product.production_companies.length - 1) ? ', ' : '.' }}
+            </ng-container>
+        </p>
+
+
+        <p *ngIf="productType === 'movie'">
+            <b> Fecha de Salida: </b>{{ product.release_date | date }}
+        </p>
+
+        <p *ngIf="productType === 'tv'">
+            <b> Numero de temporadas: </b>{{ product.number_of_seasons }}
+        </p>
+        <p *ngIf="productType === 'tv'">
+            <b> Numero de episodios: </b>{{ product.number_of_episodes }}
+        </p>
+
+        <b> Rating: </b> {{ product.vote_average }}
+
+        <div class="rate-container">
+            <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(product.vote_average) >= 1 }"
+                aria-label="1">star</mat-icon>
+            <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(product.vote_average) >= 2 }"
+                aria-label="2">star</mat-icon>
+            <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(product.vote_average) >= 3 }"
+                aria-label="3">star</mat-icon>
+            <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(product.vote_average) >= 4 }"
+                aria-label="4">star</mat-icon>
+            <mat-icon class="icon-rate" [ngClass]="{ 'rated' : getRatedNumber(product.vote_average) >= 5 }"
+                aria-label="5">star</mat-icon>
+        </div>
+
+    </div>
+</div>

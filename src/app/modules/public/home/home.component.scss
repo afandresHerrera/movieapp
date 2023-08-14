@@ -1,0 +1,77 @@
+::ng-deep.mat-tab-body-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+::ng-deep.mat-tab-body-wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+::ng-deep.mat-paginator-outer-container {
+  background-color: #010a11;
+  color: #fff;
+}
+
+.mat-card {
+  width: 240px;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 3rem;
+  background-color: #0d0c0c;
+  color: #fff;
+  transition: all ease-in-out 100ms;
+  cursor: pointer;
+
+  &:hover {
+    animation: myAnim 700ms ease-in 0s 1 normal forwards;;
+    // transform: scale(1.05);
+  }
+
+  .title {
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+    text-align: center;
+  }
+
+  .genre-names {
+    min-height: 1rem;
+    text-align: center;
+  }
+
+  img {
+    border-radius: 3rem;
+    box-shadow: 0 0 6px 3px rgb(35 35 35);
+  }
+}
+
+@keyframes myAnim {
+	0% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+		transform-origin: center center;
+	}
+
+	10% {
+		animation-timing-function: ease-in;
+		transform: scale(1.025);
+	}
+
+	17% {
+		animation-timing-function: ease-out;
+		transform: scale(1.05);
+	}
+
+	33% {
+		animation-timing-function: ease-in;
+		transform: scale(1.05);
+	}
+
+	45% {
+		animation-timing-function: ease-out;
+		transform: scale(1.05);
+	}
+}
+

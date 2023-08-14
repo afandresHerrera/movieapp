@@ -1,1 +1,147 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$movieapp-primary: mat.define-palette(mat.$indigo-palette);
+$movieapp-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$movieapp-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$movieapp-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $movieapp-primary,
+      accent: $movieapp-accent,
+      warn: $movieapp-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($movieapp-theme);
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+html * {
+  box-sizing: inherit;
+  font-size: 16px;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+body {
+  background-color: #f4f6f9;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+  margin: 0;
+  user-select: none;
+}
+
+body a,
+body label,
+body p {
+  font-family: inherit;
+  user-select: all;
+}
+
+// global styles
+// por la simpleesa de los estilos se dejan aqui para los componentes header y footer
+// ya que hacen parte del layout completo de la app
+.main-header {
+  background-color: #032541;
+  width: 100%;
+
+  .inner-header {
+    padding: 0.75rem 0;
+    margin: 0 auto;
+    max-width: 1280px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+
+  .logo {
+    height: 1.5rem;
+    margin: 0 auto;
+  }
+}
+
+.main-footer {
+  background-color: #032541;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+
+  p {
+    font-weight: 700;
+    margin: 0;
+    color: #f4f6f9;
+    font-size: 0.75rem;
+    letter-spacing: 0.75px;
+  }
+}
+
+// (100vh + header + footer) 48 + 46 = 94px
+.main-body-content {
+  // background: rgb(66, 66, 70);
+  // background: linear-gradient(90deg, #424246 0%, #27334e 48%, #172133 100%);
+  // background-image: linear-gradient(
+  //   90deg,
+  //   #424246 0%,
+  //   #27334e 50%,
+  //   #172133 100%
+  // );
+  background: rgb(142, 205, 161);
+  background: linear-gradient(
+    90deg,
+    rgba(142, 205, 161, 1) 0%,
+    rgba(106, 199, 179, 1) 25%,
+    rgba(70, 192, 197, 1) 50%,
+    rgba(39, 186, 210, 1) 75%,
+    rgba(1, 179, 229, 1) 100%
+  );
+  // padding: 1rem 0;
+  min-height: calc(100vh - 94px);
+}
+
+.mat-tab-label-container {
+  background-color: #010a11;
+
+  .mat-tab-list {
+    .mat-tab-label {
+      color: #fff;
+      opacity: 0.85;
+
+      .mat-tab-label-content {
+        text-transform: capitalize;
+      }
+    }
+
+    .mat-ink-bar {
+      background-color: #15b7dc;
+    }
+  }
+}
